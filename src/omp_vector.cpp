@@ -1,10 +1,9 @@
 #include <iostream>
 #include <cstdlib>
-#include <omp.h> // OpenMP 기능과 시간 측정 함수를 쓰기 위해 필수!
+#include <omp.h> // OpenMP 기능과 시간 측정 함수를 쓰기 위해 필수
 
 // 병렬 덧셈 함수
 void addVectors(float* a, float* b, float* result, int size) {
-    // 🎇 마법의 주문 🎇
     // 이 한 줄만 쓰면, 아래의 for 반복문을 스레드들이 자동으로 N등분해서 나눠 가집니다.
     #pragma omp parallel for
     for (int i = 0; i < size; i++) {
@@ -29,12 +28,12 @@ int main() {
 
     std::cout << "=== 스레드 32개가 1억 번 덧셈을 시작합니다 ===" << std::endl;
 
-    // ⏱️ OpenMP 전용 초정밀 타이머 작동 시작!
+    // OpenMP 전용 초정밀 타이머 작동 시작!
     double start_time = omp_get_wtime();
 
     addVectors(A, B, C, size);
 
-    // ⏱️ 타이머 종료!
+    // 타이머 종료!
     double end_time = omp_get_wtime();
 
     std::cout << "C[0]의 값: " << C[0] << " (예상값: 3.0)" << std::endl;
